@@ -1,0 +1,88 @@
+/*The program performs the following actions: The professor makes the group roll call,
+The group selects the headman for the highest average score.
+ */
+import java.util.*;
+
+public class First_year_students {
+    public static void main(String[] args) {
+        Professor prof = new Professor();
+        System.out.println(prof.professor());
+        System.out.println("");
+        Group all = new Group();
+        System.out.println(all.group());
+    }
+}
+class Professor {                                                       //professor makes a roll call, the result in the console
+
+    public  Professor professor() {
+        Professor humans = new Professor();
+
+        HashMap<String, Boolean> students = new LinkedHashMap<>();
+        students.put("student1", true);                                 // true - student is present
+        students.put("student2", true);
+        students.put("student3", false);                                // false - no student
+        students.put("student4", true);
+        students.put("student5", true);
+        students.put("student6", false);
+        students.put("student7", false);
+        students.put("student8", true);
+        students.put("student9", true);
+        students.put("student10", true);
+        System.out.println("Roll call: ");
+        System.out.println("");
+        System.out.println("Present students: ");
+        humans.getPresentStudents(students);
+        System.out.println("");
+        System.out.println("Missing students: ");
+        humans.getAbsentStudents(students);
+        return null;
+    }
+
+
+
+    public void getPresentStudents(HashMap<String, Boolean> students) {     //present students
+        if (students.size() < 1) {
+            System.out.println("The teacher did not come:)");
+        } else {
+            for (String human : students.keySet()) {
+                if (students.get(human) == true) {
+                    System.out.println(human);
+                }
+            }
+        }
+    }
+
+    public void getAbsentStudents(HashMap<String, Boolean> students) {      //absent students
+        if (students.size() < 1) {
+            System.out.println("The teacher did not come:)");
+        } else {
+            for (String human : students.keySet()) {
+                if (students.get(human) == false) {
+                    System.out.println(human);
+                }
+            }
+        }
+    }
+}
+class Group {                                                               // elder is determined by highest average score
+
+    public Group group() {
+
+        HashMap<String, Integer> studentsMarks = new HashMap<>();
+        studentsMarks.put("student1", 58);
+        studentsMarks.put("student2", 41);
+        studentsMarks.put("student3", 15);
+        studentsMarks.put("student4", 18);
+        studentsMarks.put("student5", 98);
+        studentsMarks.put("student6", 77);
+        studentsMarks.put("student7", 23);
+        studentsMarks.put("student8", 96);
+        studentsMarks.put("student9", 88);
+        studentsMarks.put("student10", 41);
+        System.out.println("The head of the group will be a student with the highest grade point average:");
+        Integer maximumMark = Collections.max(studentsMarks.values());
+        System.out.print(studentsMarks.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey) + "");
+        System.out.println(maximumMark);
+        return null;
+    }
+}

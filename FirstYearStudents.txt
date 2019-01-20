@@ -1,0 +1,88 @@
+/*Программа выполняет следующие действия: Профессор делает перекличку групппы,
+группа выбирает старосту по наивысшему среднему баллу.
+ */
+import java.util.*;
+
+public class First_year_students {
+    public static void main(String[] args) {
+        Professor prof = new Professor();
+        System.out.println(prof.professor());
+        System.out.println("");
+        Group all = new Group();
+        System.out.println(all.group());
+    }
+}
+class Professor {                                                       //профессор делает перекличку, результат в консоли
+
+    public  Professor professor() {
+        Professor humans = new Professor();
+
+        HashMap<String, Boolean> students = new LinkedHashMap<>();
+        students.put("студент1", true);                                 // true - студент присутствует
+        students.put("студент2", true);
+        students.put("студент3", false);                                // false - студент отсутствует
+        students.put("студент4", true);
+        students.put("студент5", true);
+        students.put("студент6", false);
+        students.put("студент7", false);
+        students.put("студент8", true);
+        students.put("студент9", true);
+        students.put("студент10", true);
+        System.out.println("Перекличка: ");
+        System.out.println("");
+        System.out.println("Присутствующие студенты: ");
+        humans.getPresentStudents(students);
+        System.out.println("");
+        System.out.println("Отсутствующие студенты: ");
+        humans.getAbsentStudents(students);
+        return null;
+    }
+
+
+
+    public void getPresentStudents(HashMap<String, Boolean> students) {     //присутствующие студенты
+        if (students.size() < 1) {
+            System.out.println("Препод не пришел:)");
+        } else {
+            for (String human : students.keySet()) {
+                if (students.get(human) == true) {
+                    System.out.println(human);
+                }
+            }
+        }
+    }
+
+    public void getAbsentStudents(HashMap<String, Boolean> students) {      //отсутствующие студенты
+        if (students.size() < 1) {
+            System.out.println("Препод не пришел:)");
+        } else {
+            for (String human : students.keySet()) {
+                if (students.get(human) == false) {
+                    System.out.println(human);
+                }
+            }
+        }
+    }
+}
+class Group {                                                               // определяется староста через найвысший средний балл
+
+    public Group group() {
+        
+        HashMap<String, Integer> studentsMarks = new HashMap<>();
+        studentsMarks.put("студент1", 58);
+        studentsMarks.put("студент2", 41);
+        studentsMarks.put("студент3", 15);
+        studentsMarks.put("студент4", 18);
+        studentsMarks.put("студент5", 98);
+        studentsMarks.put("студент6", 77);
+        studentsMarks.put("студент7", 23);
+        studentsMarks.put("студент8", 96);
+        studentsMarks.put("студент9", 88);
+        studentsMarks.put("студент10", 41);
+        System.out.println("Старостой группы будет студент с найвысшим средним баллом:");
+        Integer maximumMark = Collections.max(studentsMarks.values());
+        System.out.print(studentsMarks.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey) + "");
+        System.out.println(maximumMark);
+        return null;
+    }
+}
